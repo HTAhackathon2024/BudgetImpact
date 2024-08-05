@@ -123,20 +123,8 @@ comparator_costs <-  c(1500,2000)
 
 
 
-years<-base_year
-prevalence<-matrix(0,
-                   nrow=n_comparators+1,
-                   ncol=n_years,
-                   dimnames = c())
+################################
+#      Tornado diagram         #
+################################
 
 
-
-incidence<-matrix(0,
-                   nrow=n_comparators+1,
-                   ncol=n_years,
-                   dimnames = c())
-
-costs<-matrix(0,
-                   nrow=n_comparators+1,
-                   ncol=n_years,
-                   dimnames = c())
