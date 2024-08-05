@@ -1,2 +1,2 @@
 # BudgetImpact
-Creating budget impact models in R
+Creating budget impact models in R.
