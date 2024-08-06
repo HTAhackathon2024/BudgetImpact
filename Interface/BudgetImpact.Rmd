@@ -1,0 +1,52 @@
+---
+title: "BudgetImpact"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+runtime: shiny
+---
+
+```{r global, include=FALSE}
+# load data in 'global' chunk so it can be shared by all users of the dashboard
+library(DT)
+library(tidyverse)
+library(ggplot2)
+library(mgcv)
+library(magrittr)
+
+dataset <- diamonds
+```
+
+Sidebar {.sidebar}
+=====================================
+```{r}
+values <- reactiveValues(varA = NULL,
+                         varB = NULL,
+                         varC = NULL)
+
+selectInput('input1', 'Input 1', c("A","B"))
+
+
+```
+
+Page 1
+=====================================  
+### Panel A  {data-height=300}
+```{r}
+#renderTable(values$df_CPI_PPP,
+#          fillContainer = FALSE)
+
+```
+
+### Panel B: {data-height=150}
+```{r}
+
+```
+
+### Panel C
+```{r}
+
+
+```
+
+
