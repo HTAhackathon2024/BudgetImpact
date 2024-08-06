@@ -26,30 +26,39 @@ years = seq(base_year,base_year + time_horizon)
 ################################
 #     Patient population      #
 ################################
-# 
+patient_population = function(time_horizon,
+                              prevalent_patients,
+                              incident_patients,
+                              mortality_rate_in_patients_with_condition,
+                              patients_eligible_for_the_new_intervention_under_the_license,
+                              sub_population_of_eligible_patient_population_under_consideration
+                              ){
+    prevalent_patients = rep(prevalent_patients,time_horizon)
+    incident_patients = rep(incident_patients,time_horizon)
+    number_of_patients_with_condition = prevalent_patients+incident_patients
+    net_number_of_patients = number_of_patients_with_condition*(1-mortality_rate_in_patients_with_condition)
+    number_of_patients_potentially_treatable_under_license = net_number_of_patients * 
+    patients_eligible_for_the_new_intervention_under_the_license
+    eligible_patients_treated_with_intervention = number_of_patients_potentially_treatable_under_license*sub_population_of_eligible_patient_population_under_consideration
+  
+  res = list(prevalent_patients = prevalent_patients,
+             incident_patients = incident_patients,
+             number_of_patients_with_condition = number_of_patients_with_condition,
+             net_number_of_patients = net_number_of_patients,
+             number_of_patients_potentially_treatable_under_license = number_of_patients_potentially_treatable_under_license,
+             eligible_patients_treated_with_intervention = eligible_patients_treated_with_intervention)
+  
+  return(res)
+}
 
-prevalent_patients = rep(100,time_horizon)
+patient_population(time_horizon = 5,
+                   prevalent_patients = 110,
+                   incident_patients = 20,
+                   mortality_rate_in_patients_with_condition = 0.10,
+                   patients_eligible_for_the_new_intervention_under_the_license = 0.45, 
+                   sub_population_of_eligible_patient_population_under_consideration = 0.9
+)
 
-incident_patients = rep(10,time_horizon)
-
-number_of_patients_with_condition = prevalent_patients+incident_patients
-
-mortality_rate_in_patients_with_condition = rep(0.05,time_horizon)
-
-net_number_of_patients = 
-  number_of_patients_with_condition*(1-mortality_rate_in_patients_with_condition)
-
-patients_eligible_for_the_new_intervention_under_the_license = 
-  rep(0.40,time_horizon)
-
-number_of_patients_potentially_treatable_under_license = 
-  net_number_of_patients * 
-  patients_eligible_for_the_new_intervention_under_the_license
-
-sub_population_of_eligible_patient_population_under_consideration = rep(0.8,time_horizon)
-
-eligible_patients_treated_with_intervention = 
-  number_of_patients_potentially_treatable_under_license*sub_population_of_eligible_patient_population_under_consideration
 
 # Market shares
 market_share_without_intervention = 
