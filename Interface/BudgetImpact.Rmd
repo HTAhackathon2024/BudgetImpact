@@ -28,11 +28,11 @@ selectInput('input1', 'Input 1', c("A","B"))
 
 ```
 
-Page 1
+Welcome
 =====================================  
 ### Panel A  {data-height=300}
 ```{r}
-#renderTable(values$df_CPI_PPP,
+#renderTable(values$varA,
 #          fillContainer = FALSE)
 
 ```
@@ -49,3 +49,51 @@ Page 1
 ```
 
 
+Population
+=====================================  
+### Panel A  {data-height=300}
+```{r}
+#renderTable(values$varA,
+#          fillContainer = FALSE)
+
+```
+
+
+Uptake
+=====================================  
+### Panel A  {data-height=300}
+```{r}
+#renderTable(values$varA,
+#          fillContainer = FALSE)
+
+```
+
+
+Cost
+=====================================  
+### Panel A  {data-height=300}
+```{r}
+#renderTable(values$varA,
+#          fillContainer = FALSE)
+
+```
+
+
+Calculations
+=====================================  
+### Panel A  {data-height=300}
+```{r}
+#renderTable(values$varA,
+#          fillContainer = FALSE)
+
+```
+
+
+Results
+=====================================  
+### Panel A  {data-height=300}
+```{r}
+#renderTable(values$varA,
+#          fillContainer = FALSE)
+
+```
