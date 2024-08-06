@@ -65,6 +65,13 @@ summary_of_population_without_new_intervention = eligible_patients_treated_with_
 
 summary_of_population_with_new_intervention = eligible_patients_treated_with_intervention * market_share_with_intervention
 
+number_of_patients_who_died = 
+  number_of_patients_with_condition *
+  mortality_rate_in_patients_with_condition *
+  patients_eligible_for_the_new_intervention_under_the_license *
+  sub_population_of_eligible_patient_population_under_consideration *
+  market_share_with_intervention
+
 
 ################################
 #     Cost      #
@@ -86,7 +93,13 @@ cost_admin = matrix(c(rep(100,time_horizon),
                     ncol = time_horizon,
                     byrow = TRUE)
 
-cost_total = cost_acquisition * cost_PAS + cost_admin
+cost = cost_acquisition * cost_PAS + cost_admin
+
+total_cost_of_intervention =  
+  (summary_of_population_with_new_intervention * cost) +
+  (0.5 * cost * number_of_patients_who_died)
+
+total_cost_over_time_horizon = rowSums(total_cost_of_intervention)
 
 ################################
 #     Results      #
