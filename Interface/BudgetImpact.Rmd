@@ -24,6 +24,7 @@ values <- reactiveValues(varA = NULL,
                          varC = NULL)
 
 selectInput('input1', 'Input 1', c("A","B"))
+selectInput('input2', 'Other input', c("A","B"))
 
 
 ```
