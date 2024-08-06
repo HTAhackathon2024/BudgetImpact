@@ -11,3 +11,4 @@ https://shiny.york.ac.uk/YHEC_Examples/
 Previous packages:
 https://github.com/ready4-dev/bimp
 
+![functions required](https://github.com/user-attachments/assets/2d5e9d4c-2dcd-4c4f-a98f-4e01376216a8)
