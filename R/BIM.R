@@ -113,6 +113,31 @@ comparator_costs <-  c(1500,2000)
 
 
 
+# World with intervention calculations
+world_with_intervention <- matrix(0, nrow = length(Years), ncol = 1)
+world_without_intervention <- matrix(0, nrow = length(Years), ncol = 1)
+
+for (i in 1:length(Years)) {
+  world_with_intervention[i] <- sum(
+    market_shares_with_intervention[, i] * c(intervention_costs, comparator_costs)
+  )
+  
+  world_without_intervention[i] <- sum(
+    market_shares_no_intervention[, i] * comparator_costs
+  )
+}
+
+# Gross budget is the cost of the new drug over the 5 years
+Gross_budget <- sum(market_shares_with_intervention[1, ] * intervention_costs)
+
+# Net budget is the difference between the world with and without the intervention
+Net_budget <- sum(world_with_intervention) - sum(world_without_intervention)
+
+
+
+
+
+
 
 
 
@@ -120,6 +145,8 @@ comparator_costs <-  c(1500,2000)
 #           Results            #
 ################################
 
+Gross_budget
+Net_budget
 
 
 
