@@ -17,60 +17,81 @@
 ################################
 #           Inputs             #
 ################################
-
-country<-c("Ireland","UK","Canada")
-
 # Years for the budget
-Years<-list("2024","2025","2026","2027","2028")
-# Should we use base_year<-2024 then add n_years<-5 somehow?
-
-# Intervention
-n_interventions <-  1
-intervention_names <-  c("Intervention")
-
-# Comparators 
-
-n_comparators <-  2
-comparator_names <-  c("Comp1","Comp2")
+base_year = 2024
+time_horizon = 5
+years = seq(base_year,base_year + time_horizon)
 
 
-# Prevalent Patients
+################################
+#     Patient population      #
+################################
+# 
 
+prevalent_patients = rep(100,time_horizon)
 
-# Incident Patients
+incident_patients = rep(10,time_horizon)
 
+number_of_patients_with_condition = prevalent_patients+incident_patients
 
-# Mortality Rate
+mortality_rate_in_patients_with_condition = rep(0.05,time_horizon)
 
+net_number_of_patients = 
+  number_of_patients_with_condition*(1-mortality_rate_in_patients_with_condition)
 
-# Eligibility license
+patients_eligible_for_the_new_intervention_under_the_license = 
+  rep(0.40,time_horizon)
 
+number_of_patients_potentially_treatable_under_license = 
+  net_number_of_patients * 
+  patients_eligible_for_the_new_intervention_under_the_license
 
-# Eligibility consideration
+sub_population_of_eligible_patient_population_under_consideration = rep(0.8,time_horizon)
 
-
+eligible_patients_treated_with_intervention = 
+  number_of_patients_potentially_treatable_under_license*sub_population_of_eligible_patient_population_under_consideration
 
 # Market shares
+market_share_without_intervention = 
+  matrix(1, nrow = 1, ncol = time_horizon)
 
-# Creating empty space for the matrix calculations to add in the values
-market_shares_no_intervention <-  array(dim = c(n_comparators, length(Years)), 
-                                        dimnames = list(comparator_names,Years))
+market_share_with_intervention = 
+  matrix(0.5, 
+         nrow = 1+nrow(market_share_without_intervention), 
+         ncol = time_horizon,
+         byrow = TRUE)
 
-market_shares_with_intervention <-  array(dim = c(n_interventions+n_comparators, length(Years)), 
-                                          dimnames = list(c(intervention_names,comparator_names),Years))
+summary_of_population_without_new_intervention = eligible_patients_treated_with_intervention * market_share_without_intervention
 
-# Market shares inputs
+summary_of_population_with_new_intervention = eligible_patients_treated_with_intervention * market_share_with_intervention
 
-marketshares_noI <- list(
-  comp1 = c(0.1, 0.15, 0.2, 0.25, 0.3),
-  comp2 = c(0.9, 0.85, 0.8, 0.75, 0.7)
-)
 
-marketshares_I <- list(
-  int1 = c(0.1, 0.15, 0.15, 0.15, 0.2),
-  comp1 = c(0.1, 0.1, 0.1, 0.1, 0.1),
-  comp2 = c(0.9, 0.85, 0.85, 0.85, 0.7)
-)
+################################
+#     Cost      #
+################################
+cost_PAS =  matrix(1,
+                   nrow = 1+nrow(market_share_without_intervention), 
+                   ncol = time_horizon,
+                   byrow = TRUE)
+
+cost_acquisition = matrix(c(rep(1000,time_horizon), 
+                            rep(800,time_horizon)),
+                          nrow = 1+nrow(market_share_without_intervention), 
+                          ncol = time_horizon,
+                          byrow = TRUE)
+
+cost_admin = matrix(c(rep(100,time_horizon), 
+                      rep(100,time_horizon)),
+                    nrow = 1+nrow(market_share_without_intervention), 
+                    ncol = time_horizon,
+                    byrow = TRUE)
+
+cost_total = cost_acquisition * cost_PAS + cost_admin
+
+################################
+#     Results      #
+################################
+gross_drug_budget_impact = summary_of_population_with_new_intervention * cost_total
 
 
 # For loop for world without intervention
