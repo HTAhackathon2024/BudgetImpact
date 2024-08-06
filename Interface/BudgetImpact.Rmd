@@ -19,6 +19,7 @@ library(magrittr)
 Sidebar {.sidebar}
 =====================================
 ```{r}
+# There are 3 input buttons
 values <- reactiveValues(varA = NULL,
                          varB = NULL,
                          varC = NULL)
