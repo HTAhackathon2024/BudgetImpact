@@ -31,6 +31,7 @@ selectInput('input1', 'Input 1', c("A","B"))
 Welcome
 =====================================  
 ### Panel A  {data-height=300}
+test test test
 ```{r}
 #renderTable(values$varA,
 #          fillContainer = FALSE)
